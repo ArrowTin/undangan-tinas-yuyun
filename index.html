@@ -234,23 +234,23 @@ section{position:relative;z-index:1;padding:5.5rem 1.5rem;}
 }
 .map-btn:hover{transform:scale(1.04);box-shadow:0 8px 28px rgba(201,146,58,.4);}
 
-/* ═══ PROTOKOL ═══ */
-#protokol{background:linear-gradient(135deg,#1e0808 0%,#140a02 100%);}
-.protokol-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.1rem;}
-.protokol-item{
+/* ═══ hiburan ═══ */
+#hiburan{background:linear-gradient(135deg,#1e0808 0%,#140a02 100%);}
+.hiburan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.1rem;}
+.hiburan-item{
   text-align:center;padding:1.7rem 1rem;
   background:rgba(192,50,26,.09);border:1px solid rgba(192,50,26,.22);
   border-radius:10px;transition:background .3s,transform .3s;position:relative;overflow:hidden;
 }
-.protokol-item::before{
+.hiburan-item::before{
   content:'';position:absolute;top:-20px;right:-20px;width:60px;height:60px;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath fill='none' stroke='%236a9048' stroke-width='.8' opacity='.3' d='M30 0 L60 30 L30 60 L0 30Z'/%3E%3C/svg%3E");
 }
-.protokol-item:hover{background:rgba(192,50,26,.17);transform:translateY(-3px);}
-.protokol-icon{font-size:2rem;margin-bottom:.7rem;}
-.protokol-title{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.2em;
+.hiburan-item:hover{background:rgba(192,50,26,.17);transform:translateY(-3px);}
+.hiburan-icon{font-size:2rem;margin-bottom:.7rem;}
+.hiburan-title{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
-.protokol-desc{font-size:.88rem;color:var(--parchment);opacity:.78;line-height:1.6;}
+.hiburan-desc{font-size:.88rem;color:var(--parchment);opacity:.78;line-height:1.6;}
 
 /* ═══ REKENING ═══ */
 #rekening{background:linear-gradient(180deg,#140a02 0%,#1e0808 100%);}
@@ -571,14 +571,14 @@ body.modal-open {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(rgba(242, 233, 233, 0.85), rgba(242, 233, 233, 0.95)), 
+    background: linear-gradient(rgba(106, 26, 16, 0.85), rgba(106, 26, 16, 0.95)), 
             url('https://unsplash.com') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
     font-family: 'Inter', sans-serif;
-    color: #0f0f0f;
+    color: #f5e5db;
     padding: 20px;
 }
 
@@ -610,7 +610,7 @@ body.modal-open {
     font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 3px;
-    color: #0d0d0e;
+    color: #f5e5db;
     margin-bottom: 12px;
     font-weight: 400;
 }
@@ -620,7 +620,7 @@ body.modal-open {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     font-weight: 700;
-    color: #030303;
+    color: #f5e5db;
     margin-bottom: 20px;
     letter-spacing: 1px;
 }
@@ -629,7 +629,7 @@ body.modal-open {
 .invitation-text {
     font-size: 1rem;
     line-height: 1.6;
-    color: #0c0c0c;
+    color: #f5e5db;
     margin-bottom: 35px;
     font-weight: 300;
 }
@@ -717,10 +717,11 @@ body.modal-open {
     <a href="#countdown">Hitung Mundur</a>
     <a href="#couple">Pengantin</a>
     <a href="#acara">Acara</a>
-    <a href="#galeri">Galeri</a>
     <a href="#lokasi">Lokasi</a>
     <a href="#turut">Turut Mengundang</a>
+    <a href="#hiburan">Hiburan</a>
     <a href="#rekening">Hadiah</a>
+    <a href="#galeri">Galeri</a>
     <a href="#ucapan">Ucapan</a>
   </nav>
 
@@ -924,11 +925,97 @@ body.modal-open {
           <div class="event-icon">🎊</div>
           <div class="event-name">Acara Utama</div>
           <div class="event-title">Pesta Syukuran</div>
-          <div class="event-info"><strong>4 Juli 2026</strong><br>🕙 <strong>10.00 – 18.00 WIB</strong><br>Resepsi syukuran meriah dengan tarian tradisional, musik Dayak, hiburan orgen tunggal, dan jamuan makan bersama. Mari rayakan kebahagiaan bersama kami sekeluarga!</div>
+          <div class="event-info"><strong>4 Juli 2026</strong><br>🕙 <strong>10.00 – 18.00 WIB</strong><br>Resepsi syukuran meriah dengan hiburan orgen tunggal, dan jamuan makan bersama. Mari rayakan kebahagiaan bersama kami sekeluarga!</div>
         </div>
       </div>
     </div>
   </section>
+
+
+
+  <!-- Lightbox dengan swipe -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
+    <img id="lightboxImg" src="" alt="Galeri"/>
+    <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <!-- ═══ LOKASI ═══ -->
+
+  <section id="lokasi">
+    <div class="section-inner">
+      <p class="section-title reveal">Lokasi Acara</p>
+      <h2 class="section-heading reveal">Tempat Berlangsungnya Acara</h2>
+      <div class="divider reveal"><span>📍</span></div>
+      <div class="lokasi-box reveal">
+        <div class="lokasi-icon">🏡</div>
+        <div class="lokasi-name">Kampung Sempuat</div>
+        <div class="lokasi-address">
+          Dusun Sondong, Desa Balai Gemuruh<br>
+          Kecamatan Subah, Kabupaten Sambas<br>
+          Kalimantan Barat
+        </div>
+        <a class="map-btn" href="https://goo.gl/maps/cZCEHNPkSFZ3KFPE6" target="_blank" rel="noopener">🗺️ &nbsp; Buka di Google Maps</a>
+      </div>
+      <p class="reveal" style="text-align:center;font-style:italic;opacity:.6;font-size:.95rem;">
+        Kami dengan penuh suka cita mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu.
+      </p>
+    </div>
+  </section>
+
+    <section id="hiburan">
+    <div class="section-inner">
+      <p class="section-title reveal">Hiburan Spesial</p>
+      <h2 class="section-heading reveal">Orgen Tunggal</h2>
+      <div class="divider reveal"><span>🎹</span></div>
+      <div class="hiburan-grid reveal">
+        <div class="hiburan-item">
+          <div class="hiburan-icon">🎤</div>
+          <div class="hiburan-title">Penampilan Live</div>
+          <div class="hiburan-desc">Orgen tunggal akan tampil sepanjang resepsi menghadirkan lagu-lagu hits dan lagu daerah spesial untuk memeriahkan pesta.</div>
+        </div>
+        <div class="hiburan-item">
+          <div class="hiburan-icon">🎹</div>
+          <div class="hiburan-title">Musik Nonstop</div>
+          <div class="hiburan-desc">Alunan musik orgen tunggal siap menemani dan memperindah momen bahagia sepanjang hari resepsi berlangsung.</div>
+        </div>
+        <div class="hiburan-item">
+          <div class="hiburan-icon">🎵</div>
+          <div class="hiburan-title">Lagu Pilihan</div>
+          <div class="hiburan-desc">Nikmati berbagai genre musik — dari pop, dangdut, hingga lagu adat Dayak yang akan membuat suasana semakin meriah.</div>
+        </div>
+        <div class="hiburan-item">
+          <div class="hiburan-icon">🕺</div>
+          <div class="hiburan-title">Ajak Menari</div>
+          <div class="hiburan-desc">Ayo ikut bernyanyi dan menari bersama! Jadikan momen ini kenangan indah yang tak terlupakan bersama kami.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="turut" style="background:linear-gradient(180deg,#142010 0%,#1e1008 100%);">
+    <div class="section-inner">
+      <p class="section-title reveal">Bersama Kami</p>
+      <h2 class="section-heading reveal">Turut Mengundang</h2>
+      <div class="divider reveal"><span>✦</span></div>
+      <div class="reveal" style="max-width:520px;margin:0 auto;background:rgba(201,146,58,.06);border:1px solid rgba(201,146,58,.2);border-radius:12px;padding:2rem 1.6rem;text-align:center;">
+        <div style="display:flex;flex-direction:column;gap:.65rem;">
+          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Marisius Manurung &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— Kades Sondong</span></p>
+          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Enjel Louis &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— RT 9 Sempuat</span></p>
+          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Fransiskus Kiling &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— Sempuat</span></p>
+          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Alon &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— Mugum</span></p>
+          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Karim &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— Sempuat</span></p>
+          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Suganti &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— Mugum</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
 
   <!-- ═══ GALERI ═══ -->
 
@@ -987,91 +1074,6 @@ body.modal-open {
       </p>
     </div>
   </section>
-
-  <!-- Lightbox dengan swipe -->
-  <div class="lightbox" id="lightbox">
-    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
-    <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
-    <img id="lightboxImg" src="" alt="Galeri"/>
-    <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
-    <div class="lightbox-counter" id="lightboxCounter"></div>
-  </div>
-
-  <!-- ═══ LOKASI ═══ -->
-
-  <section id="lokasi">
-    <div class="section-inner">
-      <p class="section-title reveal">Lokasi Acara</p>
-      <h2 class="section-heading reveal">Tempat Berlangsungnya Acara</h2>
-      <div class="divider reveal"><span>📍</span></div>
-      <div class="lokasi-box reveal">
-        <div class="lokasi-icon">🏡</div>
-        <div class="lokasi-name">Kampung Sempuat</div>
-        <div class="lokasi-address">
-          Dusun Sondong, Desa Balai Gemuruh<br>
-          Kecamatan Subah, Kabupaten Sambas<br>
-          Kalimantan Barat
-        </div>
-        <a class="map-btn" href="https://goo.gl/maps/cZCEHNPkSFZ3KFPE6" target="_blank" rel="noopener">🗺️ &nbsp; Buka di Google Maps</a>
-      </div>
-      <p class="reveal" style="text-align:center;font-style:italic;opacity:.6;font-size:.95rem;">
-        Kami dengan penuh suka cita mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu.
-      </p>
-    </div>
-  </section>
-
-  <!-- ═══ PROTOKOL ADAT ═══ -->
-
-  <section id="turut" style="background:linear-gradient(180deg,#142010 0%,#1e1008 100%);">
-    <div class="section-inner">
-      <p class="section-title reveal">Bersama Kami</p>
-      <h2 class="section-heading reveal">Turut Mengundang</h2>
-      <div class="divider reveal"><span>✦</span></div>
-      <div class="reveal" style="max-width:520px;margin:0 auto;background:rgba(201,146,58,.06);border:1px solid rgba(201,146,58,.2);border-radius:12px;padding:2rem 1.6rem;text-align:center;">
-        <div style="display:flex;flex-direction:column;gap:.65rem;">
-          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Marisius Manurung &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— Kades Sondong</span></p>
-          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Enjel Louis &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— RT 9 Sempuat</span></p>
-          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Fransiskus Kiling &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— Sempuat</span></p>
-          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Alon &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— Mugum</span></p>
-          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Karim &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— Sempuat</span></p>
-          <p style="font-size:.97rem;color:var(--parchment);line-height:1.6;">Suganti &amp; istri <span style="font-style:italic;color:var(--fern);font-size:.85rem;">— Mugum</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  </div><!-- /slide-6b -->
-
-  <section id="protokol">
-    <div class="section-inner">
-      <p class="section-title reveal">Hiburan Spesial</p>
-      <h2 class="section-heading reveal">Orgen Tunggal</h2>
-      <div class="divider reveal"><span>🎹</span></div>
-      <div class="protokol-grid reveal">
-        <div class="protokol-item">
-          <div class="protokol-icon">🎤</div>
-          <div class="protokol-title">Penampilan Live</div>
-          <div class="protokol-desc">Orgen tunggal akan tampil sepanjang resepsi menghadirkan lagu-lagu hits dan lagu daerah spesial untuk memeriahkan pesta.</div>
-        </div>
-        <div class="protokol-item">
-          <div class="protokol-icon">🎹</div>
-          <div class="protokol-title">Musik Nonstop</div>
-          <div class="protokol-desc">Alunan musik orgen tunggal siap menemani dan memperindah momen bahagia sepanjang hari resepsi berlangsung.</div>
-        </div>
-        <div class="protokol-item">
-          <div class="protokol-icon">🎵</div>
-          <div class="protokol-title">Lagu Pilihan</div>
-          <div class="protokol-desc">Nikmati berbagai genre musik — dari pop, dangdut, hingga lagu adat Dayak yang akan membuat suasana semakin meriah.</div>
-        </div>
-        <div class="protokol-item">
-          <div class="protokol-icon">🕺</div>
-          <div class="protokol-title">Ajak Menari</div>
-          <div class="protokol-desc">Ayo ikut bernyanyi dan menari bersama! Jadikan momen ini kenangan indah yang tak terlupakan bersama kami.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
 
   <!-- Motif separator -->
   <div class="motif-row" style="background:#1e1008;padding:1.5rem 0;">
