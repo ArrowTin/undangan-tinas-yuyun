@@ -517,6 +517,11 @@ section.ppt-section {
   opacity: 0;
   will-change: transform, opacity, clip-path;
 }
+/* Khusus drape & fracture: opacity harus 1, transisi via clip-path */
+section.ppt-section.trans-drape,
+section.ppt-section.trans-fracture {
+  opacity: 1;
+}
 section.ppt-section.ppt-done {
   opacity: 1 !important;
   transform: none !important;
@@ -534,7 +539,6 @@ section.trans-cover.ppt-done { transform: translateY(0) scale(1); opacity: 1; }
 /* 2. DRAPE — tirai jatuh dari atas (clip-path reveal dari top) */
 section.trans-drape {
   clip-path: inset(100% 0% 0% 0%);
-  opacity: 1 !important;
   transition: clip-path 0.85s cubic-bezier(.4,0,.2,1);
 }
 section.trans-drape.ppt-done { clip-path: inset(0% 0% 0% 0%); }
@@ -558,7 +562,6 @@ section.trans-prestige.ppt-done { transform: scale(1); opacity: 1; }
 /* 5. FRACTURE — pecah/muncul dengan clip diagonal */
 section.trans-fracture {
   clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
-  opacity: 1 !important;
   transition: clip-path 0.8s cubic-bezier(.4,0,.2,1);
 }
 section.trans-fracture.ppt-done { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
@@ -1757,7 +1760,7 @@ body.modal-open {
     <div class="footer-names">Tinas &amp; Yuyun</div>
     <div class="footer-date">4 · VII · 2026</div>
     <p class="footer-quote">"Adil ka talino, bacuramin ka saruga, basengat ka jubata"</p>
-    <p class="footer-credit">Syukuran Pernikahan Tinas & Yuyun · Kampung Sempuat, Sebah Sambas, Kalimantan Barat</p>
+    <p class="footer-credit">Syukuran Pernikahan Tinas & Yuyun · Kampung Sempuat, Subah Sambas, Kalimantan Barat</p>
   </footer>
 
 
@@ -1869,9 +1872,21 @@ revealEls.forEach(el => observer.observe(el));
         pptObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.04, rootMargin: '0px 0px 0px 0px' });
 
   sections.forEach(sec => pptObserver.observe(sec));
+
+  // Fallback: setelah 2.5 detik, paksa semua section yang belum tampil menjadi visible
+  setTimeout(() => {
+    sections.forEach(sec => {
+      if (!sec.classList.contains('ppt-done')) {
+        sec.classList.add('ppt-done');
+        sec.querySelectorAll('.reveal:not(.visible)').forEach((el, i) => {
+          setTimeout(() => el.classList.add('visible'), i * 80);
+        });
+      }
+    });
+  }, 2500);
 })();
 
 // ── COUNTDOWN
@@ -2249,9 +2264,15 @@ function runOpenTransition(callback) {
 
               // Mulai musik
               if (musik) {
-                musicPlaying = false;
-                musik.play().catch(function(error) {
+                musik.play().then(function() {
+                  musicPlaying = true;
+                  var btn = document.getElementById('musicBtn');
+                  var bars = document.getElementById('musicBars');
+                  if (btn) btn.textContent = '⏸';
+                  if (bars) bars.classList.remove('paused');
+                }).catch(function(error) {
                   console.log("Autoplay dicegah oleh browser:", error);
+                  musicPlaying = false;
                 });
               }
             });
