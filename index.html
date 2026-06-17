@@ -253,8 +253,9 @@ nav a:hover{color:var(--gold);opacity:1;}
   opacity:0;animation:heroFade 1.2s .7s ease forwards;}
 .hero-names em{display:block;font-style:italic;color:var(--gold);
   font-size:.5em;letter-spacing:.1em;margin:.45rem 0;}
-.hero-date{font-family:'Cinzel',serif;font-size:clamp(.85rem,2.5vw,1.1rem);
-  letter-spacing:.32em;color:var(--parchment);margin-top:1.8rem;
+.hero-date{font-family:'Cinzel',serif;font-size:clamp(1.4rem,5vw,2.4rem);
+  font-weight:600;letter-spacing:.22em;color:var(--gold);margin-top:1.8rem;
+  text-shadow:0 0 18px rgba(212,160,23,.45);
   opacity:0;animation:heroFade 1.2s .95s ease forwards;}
 .hero-ornament-row{display:flex;align-items:center;gap:1rem;margin:1.6rem 0;
   opacity:0;animation:heroFade 1.2s 1.1s ease forwards;}
@@ -372,6 +373,8 @@ section{position:relative;z-index:1;padding:5.5rem 2rem;}
   color:var(--cream);margin-bottom:.9rem;}
 .event-info{font-size:.92rem;line-height:1.8;color:var(--parchment);opacity:.82;}
 .event-info strong{color:var(--fern);font-style:italic;}
+.event-date-big{display:inline-block;font-size:1.6rem;font-style:normal;
+  letter-spacing:.05em;margin-bottom:.3rem;color:var(--gold);}
 
 /* ═══ LOKASI ═══ */
 #lokasi{background:linear-gradient(180deg,#140a02 0%,#1e0808 100%);text-align:center;}
@@ -499,8 +502,8 @@ footer{
 }
 .footer-names{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.3rem);
   font-style:italic;color:var(--gold);margin-bottom:.5rem;}
-.footer-date{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.3em;
-  color:var(--fern);margin-bottom:2rem;}
+.footer-date{font-family:'Cinzel',serif;font-size:clamp(1.1rem,3.5vw,1.6rem);
+  font-weight:600;letter-spacing:.28em;color:var(--fern);margin-bottom:2rem;}
 .footer-quote{font-style:italic;font-size:.95rem;color:var(--parchment);
   opacity:.5;max-width:420px;margin:0 auto 1.5rem;line-height:1.7;}
 .footer-credit{font-size:.75rem;color:var(--parchment);opacity:.28;letter-spacing:.1em;}
@@ -1089,6 +1092,91 @@ body.modal-open {
     font-family: 'Inter', sans-serif;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   TEMA SOFT PINK — HANYA UNTUK #kontenUtama
+   (modalUndangan tetap memakai tema gelap/gold asli)
+   Karena CSS custom properties (--var) bersifat turunan,
+   override di sini otomatis berlaku ke seluruh elemen anak
+   #kontenUtama yang memakai var(--gold), var(--cream), dst.
+   ═══════════════════════════════════════════════════════════ */
+#kontenUtama {
+  --bark:#fff5f7;        /* dasar terang, dipakai sbg "latar paling terang" */
+  --earth:#f7d7de;       /* pink lembut utk gradasi avatar dsb */
+  --clay:#e8a3b5;        /* pink medium, pengganti aksen merah-bata */
+  --gold:#b5586f;        /* rosewood — aksen utama, judul, ikon */
+  --gold2:#9c3d54;       /* rosewood lebih gelap, utk teks penting/nomor rekening */
+  --leaf:#e8a3b5;        /* pengganti aksen kedua (avatar ucapan) */
+  --moss:#e8a3b5;
+  --fern:#c46b80;        /* rosewood medium, utk label & sub-teks */
+  --cream:#5a2433;       /* coklat tua rosewood — teks utama/judul besar */
+  --parchment:#7a3a48;   /* rosewood gelap kecoklatan — teks paragraf */
+
+  background:linear-gradient(180deg,#ffe4ec 0%,#ffeef2 35%,#fff8fa 70%,#ffffff 100%);
+  color:var(--parchment);
+}
+
+/* Latar tiap section: gradasi pink ke putih, makin ke bawah makin terang */
+#kontenUtama #hero{
+  background:radial-gradient(ellipse at 50% 0%,rgba(232,163,181,.35) 0%,transparent 55%),
+             radial-gradient(ellipse at 50% 110%,rgba(255,228,236,.9) 0%,transparent 55%),
+             linear-gradient(170deg,#ffd9e3 0%,#ffe4ec 35%,#ffeef2 70%,#fff8fa 100%);
+}
+#kontenUtama #countdown{background:linear-gradient(135deg,#ffeef2 0%,#fff5f7 100%);}
+#kontenUtama #couple{background:linear-gradient(180deg,#fff5f7 0%,#ffeef2 100%);}
+#kontenUtama #acara{background:linear-gradient(135deg,#ffeef2 0%,#fff5f7 100%);}
+#kontenUtama #lokasi{background:linear-gradient(180deg,#fff5f7 0%,#ffeef2 100%);}
+#kontenUtama #hiburan{background:linear-gradient(135deg,#ffeef2 0%,#fff5f7 100%);}
+#kontenUtama #rekening{background:linear-gradient(180deg,#fff5f7 0%,#ffeef2 100%);}
+#kontenUtama #ucapan{background:linear-gradient(180deg,#ffeef2 0%,#fff8fa 100%);}
+#kontenUtama #galeri{background:linear-gradient(135deg,#ffeef2 0%,#fff5f7 100%);}
+#kontenUtama footer{background:#fff8fa;}
+
+/* Kartu & box: latar putih lembut dgn border pink, supaya kontras teks tetap jelas */
+#kontenUtama .person-card,
+#kontenUtama .event-card,
+#kontenUtama .lokasi-box,
+#kontenUtama .hiburan-item,
+#kontenUtama .rekening-card,
+#kontenUtama .ucapan-item,
+#kontenUtama .countdown-box,
+#kontenUtama .galeri-item,
+#kontenUtama .hero-quote{
+  background:rgba(255,255,255,.65) !important;
+  border-color:rgba(181,88,111,.28) !important;
+}
+#kontenUtama .hiburan-item{background:rgba(232,163,181,.18) !important;border-color:rgba(232,163,181,.4) !important;}
+#kontenUtama .hiburan-item:hover{background:rgba(232,163,181,.3) !important;}
+#kontenUtama .rekening-norek{background:rgba(181,88,111,.08) !important;}
+#kontenUtama .galeri-tab{color:var(--parchment);border-color:rgba(181,88,111,.3);}
+#kontenUtama .galeri-video-item{background:rgba(255,255,255,.5) !important;}
+#kontenUtama .nav-wrapper nav,
+#kontenUtama .nav-toggle{
+  background:rgba(255,245,247,.92) !important;
+  border-color:rgba(181,88,111,.25) !important;
+}
+#kontenUtama nav a{color:var(--parchment);}
+#kontenUtama .music-player{
+  background:rgba(255,245,247,.92) !important;
+  border-color:rgba(181,88,111,.3) !important;
+  box-shadow:0 4px 24px rgba(181,88,111,.18);
+}
+#kontenUtama .person-avatar{
+  background:radial-gradient(circle,var(--earth),var(--bark)) !important;
+  border-color:var(--gold) !important;
+}
+
+/* Map button & elemen ber-gradient gold/clay diselaraskan ke rosewood */
+#kontenUtama .map-btn{
+  background:linear-gradient(135deg,var(--gold2),var(--gold)) !important;
+  color:#fff !important;
+}
+#kontenUtama .ucapan-avatar{background:linear-gradient(135deg,var(--gold),var(--clay)) !important;color:#fff !important;}
+#kontenUtama .motif-row{background:#ffeef2 !important;}
+#kontenUtama #turut{background:linear-gradient(180deg,#ffeef2 0%,#fff5f7 100%) !important;}
+#kontenUtama #turut .reveal{background:rgba(255,255,255,.65) !important;border-color:rgba(181,88,111,.28) !important;}
+
+
+
 /* ═══════════════════════════════════════════════
    PPT TEXT ANIMATIONS — PowerPoint-style on text
    ═══════════════════════════════════════════════ */
@@ -1547,7 +1635,7 @@ body.modal-open {
           <div class="event-icon">🎊</div>
           <div class="event-name">Acara Utama</div>
           <div class="event-title">Pesta Syukuran</div>
-          <div class="event-info"><strong>4 Juli 2026</strong><br>🕙 <strong>10.00 – 18.00 WIB</strong><br>Resepsi syukuran meriah dengan hiburan orgen tunggal, dan jamuan makan bersama. Mari rayakan kebahagiaan bersama kami sekeluarga!</div>
+          <div class="event-info"><strong class="event-date-big">4 Juli 2026</strong><br>🕙 <strong>10.00 – 18.00 WIB</strong><br>Resepsi syukuran meriah dengan hiburan orgen tunggal, dan jamuan makan bersama. Mari rayakan kebahagiaan bersama kami sekeluarga!</div>
         </div>
       </div>
     </div>
