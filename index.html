@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light only"/>
 <meta property="og:title" content="Syukuran Pernikahan Tinas & Yuyun" />
 <meta property="og:description" content="Kami dengan senang hati mengundang Anda untuk menyaksikan syukuran pernikahan Tinas dan Yuyun pada tanggal 4 Juli 2026." />
 <meta property="og:image" content="https://tinas-yuyun.duckdns.org/asset/image/depan.jpeg" />
@@ -17,6 +18,135 @@
   --bark:#1a0a08;--earth:#6a1a10;--clay:#c0321a;--gold:#d4a017;--gold2:#f0c830;
   --leaf:#8a1a10;--moss:#c0321a;--fern:#e8a020;--cream:#fff8e8;--parchment:#fde8b0;
 }
+
+/* ══ PAKSA TAMPILAN TIDAK IKUT DARK MODE SISTEM ══ */
+:root { color-scheme: light only; }
+html  { filter: none !important; background: var(--bark) !important; }
+body  { filter: none !important; background: var(--bark) !important;
+        -webkit-text-size-adjust: 100%; }
+/* Batalkan invert/hue-rotate apapun yang mungkin diinjeksi browser dark-mode */
+@media (prefers-color-scheme: dark) {
+  html, body { filter: none !important; background: var(--bark) !important; }
+  img, video, canvas, svg { filter: none !important; }
+  /* pastikan semua warna custom property tetap sama */
+  :root {
+    --bark:#1a0a08!important;--earth:#6a1a10!important;--clay:#c0321a!important;
+    --gold:#d4a017!important;--gold2:#f0c830!important;--leaf:#8a1a10!important;
+    --moss:#c0321a!important;--fern:#e8a020!important;--cream:#fff8e8!important;
+    --parchment:#fde8b0!important;
+  }
+}
+
+/* ══ ANIMASI FOTO HERO (random dipilih JS) ══ */
+@keyframes photoGrow {
+  0%   { opacity:0; transform: scale(0.55); }
+  60%  { opacity:1; transform: scale(1.06); }
+  80%  { transform: scale(0.97); }
+  100% { opacity:1; transform: scale(1); }
+}
+@keyframes photoShrink {
+  0%   { opacity:0; transform: scale(1.8); filter: blur(6px); }
+  55%  { opacity:1; transform: scale(0.96); filter: blur(0); }
+  80%  { transform: scale(1.02); }
+  100% { opacity:1; transform: scale(1); }
+}
+@keyframes photoFloat {
+  0%   { opacity:0; transform: translateY(80px) scale(0.88); filter: blur(8px); }
+  50%  { opacity:1; transform: translateY(-14px) scale(1.04); filter: blur(0); }
+  75%  { transform: translateY(5px) scale(0.98); }
+  100% { opacity:1; transform: translateY(0) scale(1); }
+}
+@keyframes photoWave {
+  0%   { opacity:0; transform: translateY(60px) rotate(-8deg) scale(0.9); }
+  35%  { opacity:1; transform: translateY(-14px) rotate(3deg) scale(1.04); }
+  60%  { transform: translateY(6px) rotate(-1.5deg); }
+  80%  { transform: translateY(-4px) rotate(.8deg); }
+  100% { opacity:1; transform: translateY(0) rotate(0deg) scale(1); }
+}
+@keyframes photoBrush {
+  0%   { opacity:0; clip-path: inset(0 100% 0 0 round 12px); transform: scale(0.95); }
+  45%  { opacity:1; clip-path: inset(0 0% 0 0 round 12px); transform: scale(1.04); }
+  75%  { transform: scale(0.98); }
+  100% { opacity:1; clip-path: inset(0 0% 0 0 round 12px); transform: scale(1); }
+}
+@keyframes photoTurns {
+  0%   { opacity:0; transform: perspective(800px) rotateY(-90deg) scale(0.8); }
+  55%  { opacity:1; transform: perspective(800px) rotateY(8deg) scale(1.03); }
+  80%  { transform: perspective(800px) rotateY(-3deg) scale(0.99); }
+  100% { opacity:1; transform: perspective(800px) rotateY(0deg) scale(1); }
+}
+@keyframes photoShapes {
+  0%   { opacity:0; clip-path: polygon(50% 50%,50% 50%,50% 50%,50% 50%); transform: scale(0.7); }
+  30%  { opacity:1; clip-path: polygon(50% 0%,100% 50%,50% 100%,0% 50%); transform: scale(1.06); }
+  60%  { clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%); transform: scale(0.97); }
+  100% { opacity:1; clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%); transform: scale(1); }
+}
+@keyframes photoLoops {
+  0%   { opacity:0; transform: rotate(-360deg) scale(0.2); }
+  55%  { opacity:1; transform: rotate(15deg) scale(1.06); }
+  78%  { transform: rotate(-5deg) scale(0.97); }
+  100% { opacity:1; transform: rotate(0deg) scale(1); }
+}
+@keyframes photoBoldReveal {
+  0%   { opacity:0; transform: scale(1.3); filter: blur(14px) saturate(2); }
+  50%  { opacity:1; filter: blur(2px) saturate(1.5); }
+  75%  { transform: scale(0.97); filter: blur(0); }
+  100% { opacity:1; transform: scale(1); filter: blur(0); }
+}
+@keyframes photoLines {
+  0%   { opacity:0; clip-path: polygon(0 0,0 0,0 100%,0 100%); transform: translateX(-40px); }
+  50%  { opacity:1; clip-path: polygon(0 0,65% 0,65% 100%,0 100%); }
+  100% { opacity:1; clip-path: polygon(0 0,100% 0,100% 100%,0 100%); transform: translateX(0); }
+}
+
+/* Class yang akan di-assign JS */
+.photo-anim-grow        { animation: photoGrow        1.1s cubic-bezier(.34,1.4,.64,1) forwards !important; }
+.photo-anim-shrink      { animation: photoShrink      1.1s cubic-bezier(.34,1.4,.64,1) forwards !important; }
+.photo-anim-float       { animation: photoFloat       1.2s cubic-bezier(.22,1,.36,1)   forwards !important; }
+.photo-anim-wave        { animation: photoWave        1.2s cubic-bezier(.22,1,.36,1)   forwards !important; }
+.photo-anim-brush       { animation: photoBrush       1.1s ease                        forwards !important; }
+.photo-anim-turns       { animation: photoTurns       1.1s cubic-bezier(.22,1,.36,1)   forwards !important; }
+.photo-anim-shapes      { animation: photoShapes      1.2s cubic-bezier(.34,1.4,.64,1) forwards !important; }
+.photo-anim-loops       { animation: photoLoops       1.2s cubic-bezier(.34,1.4,.64,1) forwards !important; }
+.photo-anim-bold-reveal { animation: photoBoldReveal  1.1s ease                        forwards !important; }
+.photo-anim-lines       { animation: photoLines       1.0s ease                        forwards !important; }
+
+/* ══ TRANSISI CURTAINS / DOORS (overlay saat buka undangan) ══ */
+#transitionOverlay {
+  position: fixed; inset: 0; z-index: 99998; pointer-events: none;
+  display: none; /* aktif via JS */
+}
+/* -- Curtains: dua panel atas-bawah -- */
+#transitionOverlay.curtains #tc-top,
+#transitionOverlay.curtains #tc-bottom,
+#transitionOverlay.doors   #tc-left,
+#transitionOverlay.doors   #tc-right { display: block; }
+
+.tc-panel {
+  position: absolute;
+  background: linear-gradient(160deg,#1a0408 0%,#3a0a14 40%,#2d0810 100%);
+  display: none;
+}
+
+/* Curtains panels */
+#tc-top    { top:0; left:0; right:0; height:50%; transform-origin: top center; }
+#tc-bottom { bottom:0; left:0; right:0; height:50%; transform-origin: bottom center; }
+/* Doors panels */
+#tc-left   { top:0; left:0; width:50%; height:100%; transform-origin: left center; }
+#tc-right  { top:0; right:0; width:50%; height:100%; transform-origin: right center; }
+
+/* Animasi CURTAINS: tutup (masuk ke tengah) */
+@keyframes curtainTopClose  { from{transform:scaleY(0)} to{transform:scaleY(1)} }
+@keyframes curtainBotClose  { from{transform:scaleY(0)} to{transform:scaleY(1)} }
+/* Animasi CURTAINS: buka (keluar ke tepi) */
+@keyframes curtainTopOpen   { from{transform:scaleY(1)} to{transform:scaleY(0)} }
+@keyframes curtainBotOpen   { from{transform:scaleY(1)} to{transform:scaleY(0)} }
+/* Animasi DOORS: tutup (masuk ke tengah) */
+@keyframes doorLeftClose    { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+@keyframes doorRightClose   { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+/* Animasi DOORS: buka (keluar ke tepi) */
+@keyframes doorLeftOpen     { from{transform:scaleX(1)} to{transform:scaleX(0)} }
+@keyframes doorRightOpen    { from{transform:scaleX(1)} to{transform:scaleX(0)} }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;scroll-padding-top:60px;}
 body{background:var(--bark);color:var(--cream);font-family:'Cormorant Garamond',Georgia,serif;overflow-x:hidden;}
@@ -44,12 +174,27 @@ body{background:var(--bark);color:var(--cream);font-family:'Cormorant Garamond',
 }
 
 /* ═══ NAV ═══ */
-nav{
+/* Wrapper: selalu fixed di atas, mengelola tinggi navbar + tombol */
+.nav-wrapper{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;justify-content:center;flex-wrap:wrap;gap:1.2rem;
-  padding:0.85rem 1.5rem;
-  background:rgba(20,10,4,0.82);backdrop-filter:blur(12px);
+  display:flex;flex-direction:column;align-items:center;
+}
+nav{
+  width:100%;
+  background:rgba(20,10,4,0.92);backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(201,146,58,0.15);
+  overflow:hidden;
+  transition:max-height .38s cubic-bezier(.4,0,.2,1), padding .38s;
+  max-height:0;
+  padding:0 1.5rem;
+}
+nav.nav-open{
+  max-height:200px;
+  padding:0.85rem 1.5rem;
+}
+.nav-links{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:1.2rem;
+  padding-bottom:.2rem;
 }
 nav a{
   font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.22em;
@@ -57,6 +202,22 @@ nav a{
   opacity:0.72;transition:color .2s,opacity .2s;
 }
 nav a:hover{color:var(--gold);opacity:1;}
+
+/* ─── NAV TOGGLE BUTTON ─── */
+.nav-toggle{
+  background:rgba(20,10,4,0.92);backdrop-filter:blur(12px);
+  border:1px solid rgba(201,146,58,0.28);border-top:none;
+  border-radius:0 0 22px 22px;
+  padding:.28rem 1.2rem .38rem;
+  cursor:pointer;
+  display:flex;align-items:center;gap:.45rem;
+  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.22em;
+  color:var(--gold);transition:background .2s,color .2s;
+  flex-shrink:0;
+}
+.nav-toggle:hover{background:rgba(30,15,6,0.98);color:var(--gold2);}
+.nav-toggle svg{transition:transform .38s cubic-bezier(.4,0,.2,1);}
+.nav-toggle.open svg{transform:rotate(180deg);}
 
 /* ═══ HERO ═══ */
 #hero{
@@ -116,8 +277,8 @@ nav a:hover{color:var(--gold);opacity:1;}
   background:linear-gradient(to bottom,var(--gold),transparent);}
 
 /* ═══ SHARED SECTION ═══ */
-section{position:relative;z-index:1;padding:5.5rem 1.5rem;}
-.section-inner{max-width:840px;margin:0 auto;}
+section{position:relative;z-index:1;padding:5.5rem 2rem;}
+.section-inner{max-width:1100px;margin:0 auto;}
 .section-title{font-family:'Cinzel',serif;font-size:clamp(.68rem,1.8vw,.84rem);
   letter-spacing:.36em;text-transform:uppercase;color:var(--gold);
   margin-bottom:.7rem;text-align:center;}
@@ -139,7 +300,7 @@ section{position:relative;z-index:1;padding:5.5rem 1.5rem;}
 /* ═══ COUNTDOWN ═══ */
 #countdown{background:linear-gradient(135deg,#1e0808 0%,#140a02 100%);}
 .countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
-  max-width:580px;margin:0 auto;}
+  max-width:720px;margin:0 auto;}
 .countdown-box{
   background:rgba(201,146,58,.07);border:1px solid rgba(201,146,58,.22);
   border-radius:10px;padding:1.5rem .5rem;text-align:center;
@@ -216,7 +377,7 @@ section{position:relative;z-index:1;padding:5.5rem 1.5rem;}
 #lokasi{background:linear-gradient(180deg,#140a02 0%,#1e0808 100%);text-align:center;}
 .lokasi-box{
   background:rgba(201,146,58,.055);border:1px solid rgba(201,146,58,.2);
-  border-radius:16px;padding:2.8rem 2rem;max-width:580px;margin:0 auto 2rem;
+  border-radius:16px;padding:2.8rem 2rem;max-width:720px;margin:0 auto 2rem;
   position:relative;overflow:hidden;
 }
 .lokasi-box::before,.lokasi-box::after{
@@ -261,7 +422,7 @@ section{position:relative;z-index:1;padding:5.5rem 1.5rem;}
 #rekening{background:linear-gradient(180deg,#140a02 0%,#1e0808 100%);}
 .rekening-intro{text-align:center;font-style:italic;font-size:1rem;
   opacity:.72;line-height:1.8;max-width:520px;margin:0 auto 2.5rem;}
-.rekening-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem;max-width:700px;margin:0 auto;}
+.rekening-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem;max-width:900px;margin:0 auto;}
 .rekening-card{
   background:rgba(201,146,58,.07);
   border:1px solid rgba(201,146,58,.25);
@@ -305,7 +466,7 @@ section{position:relative;z-index:1;padding:5.5rem 1.5rem;}
 
 /* ═══ UCAPAN ═══ */
 #ucapan{background:linear-gradient(180deg,#142010 0%,#1e1008 100%);}
-.ucapan-list{max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:1.1rem;
+.ucapan-list{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:1.1rem;
   max-height:460px;overflow-y:auto;padding-right:.4rem;}
 .ucapan-list::-webkit-scrollbar{width:3px;}
 .ucapan-list::-webkit-scrollbar-track{background:transparent;}
@@ -349,6 +510,94 @@ footer{
   transition:opacity .65s ease,transform .65s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
+/* ═══ POWERPOINT-STYLE SECTION TRANSITIONS ═══ */
+
+/* Base: semua section dimulai tersembunyi sebelum transisi */
+section.ppt-section {
+  opacity: 0;
+  will-change: transform, opacity, clip-path;
+}
+section.ppt-section.ppt-done {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+  filter: none !important;
+}
+
+/* 1. COVER — slide masuk dari bawah seperti cover PowerPoint */
+section.trans-cover {
+  transform: translateY(60px) scale(0.97);
+  transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
+}
+section.trans-cover.ppt-done { transform: translateY(0) scale(1); opacity: 1; }
+
+/* 2. DRAPE — tirai jatuh dari atas (clip-path reveal dari top) */
+section.trans-drape {
+  clip-path: inset(100% 0% 0% 0%);
+  opacity: 1 !important;
+  transition: clip-path 0.85s cubic-bezier(.4,0,.2,1);
+}
+section.trans-drape.ppt-done { clip-path: inset(0% 0% 0% 0%); }
+
+/* 3. WIND — bertiup dari kiri, distorsi miring */
+section.trans-wind {
+  transform: skewX(-8deg) translateX(-80px);
+  opacity: 0;
+  transition: opacity 0.65s ease, transform 0.7s cubic-bezier(.34,1.56,.64,1);
+}
+section.trans-wind.ppt-done { transform: skewX(0deg) translateX(0); opacity: 1; }
+
+/* 4. PRESTIGE — fade + zoom keluar dari tengah */
+section.trans-prestige {
+  transform: scale(1.08);
+  opacity: 0;
+  transition: opacity 0.75s ease, transform 0.75s cubic-bezier(.4,0,.2,1);
+}
+section.trans-prestige.ppt-done { transform: scale(1); opacity: 1; }
+
+/* 5. FRACTURE — pecah/muncul dengan clip diagonal */
+section.trans-fracture {
+  clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+  opacity: 1 !important;
+  transition: clip-path 0.8s cubic-bezier(.4,0,.2,1);
+}
+section.trans-fracture.ppt-done { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
+
+/* 6. CRUSH — tertekan dari atas, lalu terbuka */
+section.trans-crush {
+  transform: scaleY(0.05) translateY(-40px);
+  opacity: 0;
+  transform-origin: top center;
+  transition: opacity 0.5s ease, transform 0.7s cubic-bezier(.34,1.4,.64,1);
+}
+section.trans-crush.ppt-done { transform: scaleY(1) translateY(0); opacity: 1; }
+
+/* 7. AIRPLANE — terbang masuk dari sudut kanan atas */
+section.trans-airplane {
+  transform: translate(80px, -60px) rotate(4deg) scale(0.9);
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(.22,1,.36,1);
+}
+section.trans-airplane.ppt-done { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
+
+/* 8. PAGE CURL — flip horizontal seperti halaman buku */
+section.trans-pagecurl {
+  transform: perspective(900px) rotateY(-25deg) translateX(-40px);
+  opacity: 0;
+  transform-origin: left center;
+  transition: opacity 0.7s ease, transform 0.85s cubic-bezier(.4,0,.2,1);
+}
+section.trans-pagecurl.ppt-done { transform: perspective(900px) rotateY(0deg) translateX(0); opacity: 1; }
+
+/* 9. SWITCH — flip dari kanan ke kiri seperti kartu */
+section.trans-switch {
+  transform: perspective(800px) rotateY(90deg);
+  opacity: 0;
+  transform-origin: center center;
+  transition: opacity 0.5s ease 0.1s, transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+section.trans-switch.ppt-done { transform: perspective(800px) rotateY(0deg); opacity: 1; }
+
 /* ═══ KEYFRAMES ═══ */
 @keyframes heroFade{
   from{opacity:0;transform:translateY(22px);}
@@ -391,7 +640,7 @@ footer{
 }
 .galeri-tab.active,.galeri-tab:hover{background:rgba(201,146,58,.18);border-color:var(--gold);color:var(--gold);}
 .galeri-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;max-width:800px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;max-width:1100px;margin:0 auto;
 }
 .galeri-item{
   aspect-ratio:1;border-radius:10px;overflow:hidden;cursor:pointer;
@@ -406,7 +655,7 @@ footer{
 }
 .galeri-item-placeholder .ph-icon{font-size:2rem;}
 .galeri-item-placeholder .ph-label{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.15em;}
-.galeri-video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem;max-width:800px;margin:0 auto;}
+.galeri-video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem;max-width:1100px;margin:0 auto;}
 .galeri-video-item{
   border-radius:12px;overflow:hidden;border:1px solid rgba(201,146,58,.2);
   background:rgba(0,0,0,.3);position:relative;aspect-ratio:16/9;
@@ -562,7 +811,7 @@ body.modal-open {
     padding: 0;
 }
 
-  /* Reset & Base Style */
+/* Reset & Base Style */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -573,134 +822,430 @@ body.modal-open {
     overflow: hidden;
 }
 
-/* Background Utama Layar (Ganti URL gambar latar sesuai tema Anda) */
+/* ═══ BACKGROUND UTAMA MODAL ═══ */
 #modalUndangan {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(rgba(106, 26, 16, 0.85), rgba(106, 26, 16, 0.95)), 
-            url('https://unsplash.com') no-repeat center center/cover;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background:
+        radial-gradient(ellipse at 30% 20%, rgba(180,30,50,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 70% 80%, rgba(100,10,20,0.22) 0%, transparent 55%),
+        linear-gradient(160deg, #1a0408 0%, #2d0810 35%, #3a0a14 60%, #1a0408 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     color: #f5e5db;
     padding: 20px;
+    transition: opacity 0.5s ease;
 }
 
-/* Kartu Modal Premium (Glassmorphism Effect) */
+/* Pola filigri batik emas — samar di latar modal */
+#modalUndangan::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23d4a017' stroke-width='0.9'%3E%3Cpath d='M60 8 L72 30 L60 52 L48 30Z'/%3E%3Cpath d='M60 68 L72 90 L60 112 L48 90Z'/%3E%3Cpath d='M8 60 L30 48 L52 60 L30 72Z'/%3E%3Cpath d='M68 60 L90 48 L112 60 L90 72Z'/%3E%3Ccircle cx='60' cy='60' r='14'/%3E%3Ccircle cx='60' cy='60' r='22'/%3E%3Cpath d='M46 46 L74 74 M74 46 L46 74'/%3E%3Cpath d='M60 38 Q68 50 60 60 Q52 50 60 38Z'/%3E%3Cpath d='M60 60 Q68 72 60 82 Q52 72 60 60Z'/%3E%3Cpath d='M38 60 Q50 52 60 60 Q50 68 38 60Z'/%3E%3Cpath d='M60 60 Q72 52 82 60 Q72 68 60 60Z'/%3E%3Ccircle cx='15' cy='15' r='4'/%3E%3Ccircle cx='105' cy='15' r='4'/%3E%3Ccircle cx='15' cy='105' r='4'/%3E%3Ccircle cx='105' cy='105' r='4'/%3E%3Cpath d='M10 10 L20 10 L20 20 L10 20Z' transform='rotate(45 15 15)'/%3E%3Cpath d='M100 10 L110 10 L110 20 L100 20Z' transform='rotate(45 105 15)'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 120px 120px;
+}
+
+/* ═══ KARTU MODAL MEWAH ═══ */
 .modal-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 50px 40px;
-    border-radius: 24px;
+    position: relative;
+    /* Tekstur beludru maroon-burgundy */
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(160,20,40,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 100%, rgba(80,5,15,0.4) 0%, transparent 60%),
+        linear-gradient(160deg, #2c0810 0%, #4a0e1a 30%, #520c1c 55%, #3a0810 80%, #2a0610 100%);
+    /* Bingkai ganda emas champagne */
+    border: 2px solid rgba(212,160,23,0.85);
+    outline: 1px solid rgba(212,160,23,0.25);
+    outline-offset: 6px;
+    padding: 52px 44px 48px;
+    border-radius: 20px;
     max-width: 500px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    animation: fadeInUp 1s ease-out;
+    /* Bayangan mengambang + rim light emas */
+    box-shadow:
+        0 0 0 8px rgba(212,160,23,0.08),
+        0 0 28px rgba(212,160,23,0.22),
+        0 32px 72px rgba(0,0,0,0.65),
+        inset 0 1px 0 rgba(240,200,48,0.35),
+        inset 0 -1px 0 rgba(212,160,23,0.2);
+    animation: modalCardIn 1.1s cubic-bezier(.22,1,.36,1) forwards;
+    overflow: hidden;
 }
 
-/* Ikon Ornamen Atas */
+/* Lapisan silk/velvet texture via noise */
+.modal-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    pointer-events: none;
+    background:
+        repeating-linear-gradient(
+            95deg,
+            transparent 0px,
+            rgba(255,255,255,0.012) 1px,
+            transparent 2px,
+            transparent 4px
+        ),
+        repeating-linear-gradient(
+            175deg,
+            transparent 0px,
+            rgba(255,255,255,0.008) 1px,
+            transparent 3px
+        );
+    z-index: 0;
+}
+
+/* Rim light emas di tepi atas kartu */
+.modal-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(240,200,48,0.7), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Semua konten di atas pseudo-elements */
+.modal-card > * { position: relative; z-index: 2; }
+
+/* ── DEKORASI SUDUT EMAS ── */
+.modal-card .corner-ornament {
+    position: absolute;
+    width: 64px; height: 64px;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.82;
+}
+.modal-card .corner-ornament.co-tl { top: 8px; left: 8px; }
+.modal-card .corner-ornament.co-tr { top: 8px; right: 8px; transform: scaleX(-1); }
+.modal-card .corner-ornament.co-bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
+.modal-card .corner-ornament.co-br { bottom: 8px; right: 8px; transform: scale(-1); }
+
+/* ── IKON AMPLOP ── */
 .icon-wrapper {
-    font-size: 2rem;
-    color: #dfba6b; /* Warna emas muda murni */
-    margin-bottom: 25px;
-    animation: pulse 2s infinite;
+    font-size: 2.1rem;
+    color: #e8c84a;
+    margin-bottom: 22px;
+    text-shadow: 0 0 18px rgba(212,160,23,0.55);
+    animation: iconGlow 2.4s ease-in-out infinite;
 }
 
-/* Pembuka Kalimat */
+/* ── SALAM PEMBUKA ── */
 .greeting {
-    font-size: 0.95rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #f5e5db;
-    margin-bottom: 12px;
+    letter-spacing: 0.36em;
+    color: #e8c060;
+    margin-bottom: 10px;
     font-weight: 400;
+    opacity: 0.88;
 }
 
-/* Nama Tamu (Elegan & Besar) */
+/* ── NAMA TAMU ── */
 .guest-name {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+    font-size: clamp(2rem, 7vw, 2.9rem);
     font-weight: 700;
-    color: #f5e5db;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+    /* Outline emas tipis via text-shadow */
+    color: #fff8ee;
+    text-shadow:
+        0 0 1px rgba(212,160,23,0.6),
+        0 1px 12px rgba(212,160,23,0.18);
+    margin-bottom: 18px;
+    letter-spacing: 0.03em;
+    line-height: 1.15;
 }
 
-/* Teks Deskripsi */
+/* ── GARIS PEMISAH ORNAMEN ── */
+.modal-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0 auto 20px;
+    max-width: 280px;
+}
+.modal-divider::before, .modal-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,160,23,0.55), transparent);
+}
+.modal-divider span {
+    color: #d4a017;
+    font-size: 0.85rem;
+    opacity: 0.85;
+    letter-spacing: 0.1em;
+}
+
+/* ── TEKS UNDANGAN ── */
 .invitation-text {
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1rem;
-    line-height: 1.6;
-    color: #f5e5db;
-    margin-bottom: 35px;
+    line-height: 1.75;
+    color: #f0dfc8;
+    margin-bottom: 32px;
     font-weight: 300;
+    font-style: italic;
+    opacity: 0.88;
 }
 
-/* Tombol Buka Undangan Modern */
+/* ── TOMBOL BUKA UNDANGAN — copper-gold ── */
 .btn-open {
-    background: linear-gradient(135deg, #dfba6b, #bfa054);
-    color: #0f172a;
-    border: none;
-    padding: 16px 36px;
-    font-size: 1rem;
+    background: linear-gradient(135deg, #c8832a 0%, #e8a830 40%, #d4961e 70%, #b87018 100%);
+    color: #1a0808;
+    border: 1px solid rgba(240,180,50,0.6);
+    padding: 15px 38px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
     font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
     border-radius: 50px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 10px; /* Jarak antara teks dan ikon di tombol */
-    box-shadow: 0 8px 20px rgba(223, 186, 107, 0.3);
-    transition: all 0.3s ease;
+    gap: 10px;
+    box-shadow:
+        0 0 0 0 rgba(232,168,48,0),
+        0 8px 24px rgba(180,110,20,0.4),
+        inset 0 1px 0 rgba(255,220,100,0.45);
+    transition: all 0.35s cubic-bezier(.22,1,.36,1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Kilap cahaya di atas tombol */
+.btn-open::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -60%;
+    width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.22), transparent);
+    transform: skewX(-18deg);
+    transition: left 0.55s ease;
 }
 
 .btn-open:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(223, 186, 107, 0.5);
-    background: linear-gradient(135deg, #ffe094, #dfba6b);
+    transform: translateY(-3px) scale(1.03);
+    background: linear-gradient(135deg, #d49030 0%, #f0be48 40%, #e4a828 70%, #c88020 100%);
+    box-shadow:
+        0 0 0 4px rgba(212,160,23,0.22),
+        0 0 20px rgba(212,160,23,0.5),
+        0 14px 32px rgba(140,80,10,0.45),
+        inset 0 1px 0 rgba(255,230,120,0.5);
 }
+.btn-open:hover::before { left: 130%; }
 
 .btn-open:active {
-    transform: translateY(-1px);
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 4px 12px rgba(180,110,20,0.4);
 }
 
-/* Animasi Masuk */
+/* ═══ ANIMASI ═══ */
+@keyframes modalCardIn {
+    from { opacity: 0; transform: translateY(36px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+@keyframes iconGlow {
+    0%, 100% { text-shadow: 0 0 18px rgba(212,160,23,0.55); }
+    50%       { text-shadow: 0 0 32px rgba(240,200,48,0.85), 0 0 6px rgba(255,220,80,0.4); }
+}
+
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 
 /* Halaman Utama Website setelah modal ditutup */
 #kontenUtama {
     display: none;
-    padding: 50px;
+    padding: 0;
     text-align: center;
     font-family: 'Inter', sans-serif;
 }
+
+/* ═══════════════════════════════════════════════
+   PPT TEXT ANIMATIONS — PowerPoint-style on text
+   ═══════════════════════════════════════════════ */
+
+/* Base state: teks tersembunyi sampai animasi trigger */
+.txt-anim {
+  opacity: 0;
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+.txt-anim.txt-block { display: block; }
+.txt-anim.playing { animation-fill-mode: forwards; }
+
+/* ── 1. GROW / SHRINK ── */
+@keyframes txtGrow {
+  0%   { opacity:0; transform: scale(0.3); }
+  60%  { opacity:1; transform: scale(1.12); }
+  80%  { transform: scale(0.96); }
+  100% { opacity:1; transform: scale(1); }
+}
+@keyframes txtShrink {
+  0%   { opacity:0; transform: scale(2.2); }
+  60%  { opacity:1; transform: scale(0.92); }
+  80%  { transform: scale(1.04); }
+  100% { opacity:1; transform: scale(1); }
+}
+.txt-grow   { animation: txtGrow   0.75s cubic-bezier(.34,1.4,.64,1) forwards; }
+.txt-shrink { animation: txtShrink 0.75s cubic-bezier(.34,1.4,.64,1) forwards; }
+
+/* ── 2. BRUSH COLOR ── */
+@keyframes txtBrush {
+  0%   { opacity:0; clip-path: inset(0 100% 0 0); color: var(--gold); }
+  40%  { opacity:1; clip-path: inset(0 0% 0 0);   color: var(--gold); }
+  70%  { color: var(--gold2); }
+  100% { opacity:1; clip-path: inset(0 0% 0 0);   color: inherit; }
+}
+.txt-brush { animation: txtBrush 0.9s ease forwards; }
+
+/* ── 3. BOLD REVEAL ── */
+@keyframes txtBoldReveal {
+  0%   { opacity:0; font-weight:900; letter-spacing:.6em; filter: blur(3px); }
+  50%  { opacity:1; font-weight:900; letter-spacing:.1em; filter: blur(0); }
+  100% { opacity:1; font-weight:inherit; letter-spacing:inherit; filter: blur(0); }
+}
+.txt-bold-reveal { animation: txtBoldReveal 0.85s ease forwards; }
+
+/* ── 4. WAVE (per karakter simulasi — seluruh elemen) ── */
+@keyframes txtWave {
+  0%   { opacity:0; transform: translateY(40px) rotate(-5deg); }
+  30%  { opacity:1; transform: translateY(-10px) rotate(2deg); }
+  55%  { transform: translateY(5px) rotate(-1deg); }
+  75%  { transform: translateY(-3px) rotate(.5deg); }
+  100% { opacity:1; transform: translateY(0) rotate(0); }
+}
+.txt-wave { animation: txtWave 0.9s cubic-bezier(.22,1,.36,1) forwards; }
+
+/* ── 5. FLOAT OUT (masuk dari bawah mengambang) ── */
+@keyframes txtFloat {
+  0%   { opacity:0; transform: translateY(60px) scale(0.9); filter: blur(4px); }
+  50%  { opacity:1; transform: translateY(-8px) scale(1.02); filter: blur(0); }
+  75%  { transform: translateY(3px) scale(0.99); }
+  100% { opacity:1; transform: translateY(0) scale(1); }
+}
+.txt-float { animation: txtFloat 1s cubic-bezier(.22,1,.36,1) forwards; }
+
+/* ── 6. LINES (teks muncul dengan garis scan) ── */
+@keyframes txtLines {
+  0%   { opacity:0; background-size: 100% 0%; }
+  30%  { opacity:.8; }
+  100% { opacity:1; background-size: 100% 200%; }
+}
+@keyframes txtLinesBase {
+  0%   { opacity:0; transform: translateX(-30px); clip-path: polygon(0 0,0 0,0 100%,0 100%); }
+  50%  { opacity:1; clip-path: polygon(0 0,60% 0,60% 100%,0 100%); }
+  100% { opacity:1; transform: translateX(0); clip-path: polygon(0 0,100% 0,100% 100%,0 100%); }
+}
+.txt-lines { animation: txtLinesBase 0.8s ease forwards; }
+
+/* ── 7. TURNS (berputar masuk) ── */
+@keyframes txtTurns {
+  0%   { opacity:0; transform: perspective(500px) rotateX(90deg) translateY(30px); }
+  60%  { opacity:1; transform: perspective(500px) rotateX(-8deg) translateY(-4px); }
+  80%  { transform: perspective(500px) rotateX(3deg); }
+  100% { opacity:1; transform: perspective(500px) rotateX(0deg) translateY(0); }
+}
+.txt-turns { animation: txtTurns 0.85s cubic-bezier(.22,1,.36,1) forwards; }
+
+/* ── 8. SHAPES (muncul dari dalam bentuk berlian/lingkaran) ── */
+@keyframes txtShapes {
+  0%   { opacity:0; clip-path: polygon(50% 50%,50% 50%,50% 50%,50% 50%); transform: scale(0.8); }
+  30%  { opacity:1; clip-path: polygon(50% 0%,100% 50%,50% 100%,0% 50%); transform: scale(1.05); }
+  65%  { clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%); transform: scale(0.98); }
+  100% { opacity:1; clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%); transform: scale(1); }
+}
+.txt-shapes { animation: txtShapes 0.9s cubic-bezier(.34,1.4,.64,1) forwards; }
+
+/* ── 9. LOOPS (berputar spiral masuk) ── */
+@keyframes txtLoops {
+  0%   { opacity:0; transform: rotate(-360deg) scale(0); }
+  60%  { opacity:1; transform: rotate(15deg) scale(1.05); }
+  80%  { transform: rotate(-5deg) scale(0.98); }
+  100% { opacity:1; transform: rotate(0deg) scale(1); }
+}
+.txt-loops { animation: txtLoops 0.9s cubic-bezier(.34,1.4,.64,1) forwards; }
+
+/* Delay utilities */
+.td-0  { animation-delay: 0s;    }
+.td-1  { animation-delay: 0.1s;  }
+.td-2  { animation-delay: 0.2s;  }
+.td-3  { animation-delay: 0.3s;  }
+.td-4  { animation-delay: 0.4s;  }
+.td-5  { animation-delay: 0.55s; }
+.td-6  { animation-delay: 0.7s;  }
+.td-7  { animation-delay: 0.85s; }
+.td-8  { animation-delay: 1.0s;  }
+
 </style>
 </head>
 <body class="modal-open">
    <!-- Modal Pop-up -->
 <div id="modalUndangan">
     <div class="modal-card">
+        <!-- Ornamen Sudut Emas -->
+        <svg class="corner-ornament co-tl" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d4a017" stroke-width="1.1" fill="none">
+            <path d="M2 2 L32 32 M2 2 L58 2 M2 2 L2 58"/>
+            <path d="M8 8 L26 26 M8 8 L44 8 L44 22 M8 8 L8 44"/>
+            <path d="M18 2 L28 12 L18 22 L8 12Z" opacity="0.75"/>
+            <path d="M2 18 L12 28 L2 38" opacity="0.6"/>
+            <circle cx="18" cy="18" r="5" opacity="0.85"/>
+            <circle cx="30" cy="30" r="3" opacity="0.5"/>
+          </g>
+        </svg>
+        <svg class="corner-ornament co-tr" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d4a017" stroke-width="1.1" fill="none">
+            <path d="M2 2 L32 32 M2 2 L58 2 M2 2 L2 58"/>
+            <path d="M8 8 L26 26 M8 8 L44 8 L44 22 M8 8 L8 44"/>
+            <path d="M18 2 L28 12 L18 22 L8 12Z" opacity="0.75"/>
+            <path d="M2 18 L12 28 L2 38" opacity="0.6"/>
+            <circle cx="18" cy="18" r="5" opacity="0.85"/>
+            <circle cx="30" cy="30" r="3" opacity="0.5"/>
+          </g>
+        </svg>
+        <svg class="corner-ornament co-bl" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d4a017" stroke-width="1.1" fill="none">
+            <path d="M2 2 L32 32 M2 2 L58 2 M2 2 L2 58"/>
+            <path d="M8 8 L26 26 M8 8 L44 8 L44 22 M8 8 L8 44"/>
+            <path d="M18 2 L28 12 L18 22 L8 12Z" opacity="0.75"/>
+            <path d="M2 18 L12 28 L2 38" opacity="0.6"/>
+            <circle cx="18" cy="18" r="5" opacity="0.85"/>
+            <circle cx="30" cy="30" r="3" opacity="0.5"/>
+          </g>
+        </svg>
+        <svg class="corner-ornament co-br" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d4a017" stroke-width="1.1" fill="none">
+            <path d="M2 2 L32 32 M2 2 L58 2 M2 2 L2 58"/>
+            <path d="M8 8 L26 26 M8 8 L44 8 L44 22 M8 8 L8 44"/>
+            <path d="M18 2 L28 12 L18 22 L8 12Z" opacity="0.75"/>
+            <path d="M2 18 L12 28 L2 38" opacity="0.6"/>
+            <circle cx="18" cy="18" r="5" opacity="0.85"/>
+            <circle cx="30" cy="30" r="3" opacity="0.5"/>
+          </g>
+        </svg>
+
         <!-- Ikon Amplop/Surat di atas -->
         <div class="icon-wrapper">
             <i class="fa-regular fa-envelope-open"></i>
@@ -708,6 +1253,10 @@ body.modal-open {
         
         <p class="greeting">Selamat Datang,</p>
         <h1 id="namaPengunjung" class="guest-name">Tamu Undangan</h1>
+
+        <!-- Garis pemisah ornamen -->
+        <div class="modal-divider"><span>✦</span></div>
+
         <p class="invitation-text">Tanpa mengurangi rasa hormat, kami mengundang Anda untuk menghadiri dan merayakan momen bahagia di hari pernikahan kami.</p>
         
         <!-- Tombol dengan ikon panah/buka -->
@@ -718,20 +1267,41 @@ body.modal-open {
     </div>
 </div>
 
+<!-- ══ TRANSITION OVERLAY (Curtains / Doors) ══ -->
+<div id="transitionOverlay">
+  <div class="tc-panel" id="tc-top"></div>
+  <div class="tc-panel" id="tc-bottom"></div>
+  <div class="tc-panel" id="tc-left"></div>
+  <div class="tc-panel" id="tc-right"></div>
+</div>
+
 <div id="kontenUtama">
   <div class="motif-bg"></div>
-  <!-- NAV -->
-  <nav id="mainNav">
-    <a href="#countdown">Hitung Mundur</a>
-    <a href="#couple">Pengantin</a>
-    <a href="#acara">Acara</a>
-    <a href="#lokasi">Lokasi</a>
-    <a href="#hiburan">Hiburan</a>
-    <a href="#turut">Turut Mengundang</a>
-    <a href="#rekening">Hadiah</a>
-    <a href="#galeri">Galeri</a>
-    <a href="#ucapan">Ucapan</a>
-  </nav>
+
+  <!-- NAV WRAPPER -->
+  <div class="nav-wrapper">
+    <!-- NAV LINKS -->
+    <nav id="mainNav">
+      <div class="nav-links">
+        <a href="#countdown" onclick="closeNav()">Hitung Mundur</a>
+        <a href="#couple" onclick="closeNav()">Pengantin</a>
+        <a href="#acara" onclick="closeNav()">Acara</a>
+        <a href="#lokasi" onclick="closeNav()">Lokasi</a>
+        <a href="#hiburan" onclick="closeNav()">Hiburan</a>
+        <a href="#turut" onclick="closeNav()">Turut Mengundang</a>
+        <a href="#rekening" onclick="closeNav()">Hadiah</a>
+        <a href="#galeri" onclick="closeNav()">Galeri</a>
+        <a href="#ucapan" onclick="closeNav()">Ucapan</a>
+      </div>
+    </nav>
+    <!-- TOGGLE BUTTON — selalu di bawah nav, tidak pernah tertimpa -->
+    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Toggle Menu">
+      <span>MENU</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
 
   <!-- ═══ HERO ═══ -->
   <section id="hero">
@@ -1227,12 +1797,19 @@ function smoothNav(e, id) {
   window.scrollTo({ top, behavior: 'smooth' });
 }
 
-// ── NAV VISIBILITY
-const nav = document.getElementById('mainNav');
-nav.classList.add('visible');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('visible', window.scrollY > 80);
-}, {passive: true});
+// ── NAV TOGGLE
+function toggleNav() {
+  const nav = document.getElementById('mainNav');
+  const btn = document.getElementById('navToggle');
+  const isOpen = nav.classList.toggle('nav-open');
+  btn.classList.toggle('open', isOpen);
+}
+function closeNav() {
+  const nav = document.getElementById('mainNav');
+  const btn = document.getElementById('navToggle');
+  nav.classList.remove('nav-open');
+  btn.classList.remove('open');
+}
 
 // ── SCROLL REVEAL
 const revealEls = document.querySelectorAll('.reveal');
@@ -1244,8 +1821,58 @@ const observer = new IntersectionObserver((entries) => {
     const delay = Math.max(0, idx) * 90;
     setTimeout(() => entry.target.classList.add('visible'), delay);
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 revealEls.forEach(el => observer.observe(el));
+
+// ── POWERPOINT-STYLE SECTION TRANSITIONS
+(function() {
+  const PPT_TRANSITIONS = [
+    'trans-cover',
+    'trans-drape',
+    'trans-wind',
+    'trans-prestige',
+    'trans-fracture',
+    'trans-crush',
+    'trans-airplane',
+    'trans-pagecurl',
+    'trans-switch'
+  ];
+
+  // Pilih semua section kecuali hero
+  const sections = document.querySelectorAll('section:not(#hero)');
+
+  // Assign transisi random ke setiap section, hindari repeat berturutan
+  let lastTrans = '';
+  sections.forEach(sec => {
+    sec.classList.add('ppt-section');
+    let pick;
+    do {
+      pick = PPT_TRANSITIONS[Math.floor(Math.random() * PPT_TRANSITIONS.length)];
+    } while (pick === lastTrans);
+    sec.classList.add(pick);
+    lastTrans = pick;
+  });
+
+  // IntersectionObserver untuk trigger transisi saat scroll
+  const pptObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('ppt-done')) {
+        setTimeout(() => {
+          entry.target.classList.add('ppt-done');
+          // Re-trigger reveal items di dalam section ini setelah transisi
+          setTimeout(() => {
+            entry.target.querySelectorAll('.reveal:not(.visible)').forEach((el, i) => {
+              setTimeout(() => el.classList.add('visible'), i * 100);
+            });
+          }, 400);
+        }, 80);
+        pptObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  sections.forEach(sec => pptObserver.observe(sec));
+})();
 
 // ── COUNTDOWN
 function pad(n){ return String(n).padStart(2,'0'); }
@@ -1394,6 +2021,102 @@ function toggleMusic() {
 }
 
 
+// ═══════════════════════════════════════════════════
+//  PPT TEXT ANIMATIONS — Animasi Teks ala PowerPoint
+// ═══════════════════════════════════════════════════
+(function() {
+  const TEXT_ANIMS = [
+    'txt-grow', 'txt-shrink', 'txt-brush', 'txt-bold-reveal',
+    'txt-wave', 'txt-float', 'txt-lines', 'txt-turns',
+    'txt-shapes', 'txt-loops'
+  ];
+
+  // Selector semua elemen teks penting
+  const TEXT_SELECTORS = [
+    '.section-title', '.section-heading',
+    '.hero-label', '.hero-names', '.hero-date', '.hero-quote',
+    '.person-name', '.person-nick', '.person-desc',
+    '.person-parents-label', '.person-parent-name',
+    '.event-name', '.event-title', '.event-info',
+    '.lokasi-name', '.lokasi-address',
+    '.hiburan-title', '.hiburan-desc',
+    '.rekening-bank', '.rekening-name', '.rekening-atas-nama',
+    '.footer-names', '.footer-date', '.footer-quote', '.footer-credit',
+    '.countdown-label', '.ucapan-text',
+    '#turut p', '.rekening-intro',
+    '.galeri-upload-note', '.invitation-text',
+    '.guest-name', '.greeting'
+  ].join(',');
+
+  // Pilih animasi random, hindari repeat berurutan
+  function pickAnim(lastAnim) {
+    let pick;
+    do {
+      pick = TEXT_ANIMS[Math.floor(Math.random() * TEXT_ANIMS.length)];
+    } while (pick === lastAnim);
+    return pick;
+  }
+
+  // Tambahkan class txt-anim ke setiap elemen
+  const textEls = document.querySelectorAll(TEXT_SELECTORS);
+  let lastPickedAnim = '';
+  textEls.forEach((el, idx) => {
+    // Jangan dobel dengan .reveal jika sudah ada
+    el.classList.add('txt-anim', 'txt-block');
+    const anim = pickAnim(lastPickedAnim);
+    el.dataset.txtAnim = anim;
+    lastPickedAnim = anim;
+    // Delay ringan berdasarkan urutan dalam parent
+    const siblings = Array.from((el.parentElement || document.body).querySelectorAll('[data-txt-anim]'));
+    const sibIdx = siblings.indexOf(el);
+    const delayClass = 'td-' + Math.min(sibIdx, 8);
+    el.dataset.txtDelay = delayClass;
+  });
+
+  // IntersectionObserver untuk trigger animasi saat masuk viewport
+  const txtObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      if (el.classList.contains('txt-played')) return;
+      el.classList.add('txt-played');
+      // Terapkan kelas animasi + delay
+      const animClass = el.dataset.txtAnim;
+      const delayClass = el.dataset.txtDelay || 'td-0';
+      el.classList.add(animClass, delayClass, 'playing');
+      txtObserver.unobserve(el);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+  textEls.forEach(el => txtObserver.observe(el));
+
+  // Hero section: trigger langsung setelah halaman tampil
+  function triggerHeroTextAnims() {
+    document.querySelectorAll('#hero [data-txt-anim]').forEach((el, i) => {
+      setTimeout(() => {
+        if (el.classList.contains('txt-played')) return;
+        el.classList.add('txt-played');
+        el.classList.add(el.dataset.txtAnim, 'td-' + i, 'playing');
+        txtObserver.unobserve(el);
+      }, 300 + i * 180);
+    });
+  }
+
+  // Trigger hero anims setelah modal ditutup
+  const origTutupModal = window.tutupModal;
+  window.tutupModal = function() {
+    if (origTutupModal) origTutupModal();
+    setTimeout(triggerHeroTextAnims, 700);
+    setTimeout(function() { if(window._triggerPhotoAnim) window._triggerPhotoAnim(); }, 700);
+  };
+
+  // Jika tidak ada modal (load langsung)
+  if (document.getElementById('kontenUtama') &&
+      document.getElementById('kontenUtama').style.display !== 'none') {
+    setTimeout(triggerHeroTextAnims, 400);
+  }
+})();
+
  const urlParams = new URLSearchParams(window.location.search);
         const namaDariUrl = urlParams.get('nama');
 
@@ -1402,30 +2125,136 @@ function toggleMusic() {
             document.getElementById('namaPengunjung').textContent = decodeURIComponent(namaDariUrl);
         }
 
+// ════════════════════════════════════════════════════
+//  ANIMASI FOTO HERO — Pilih random saat halaman load
+// ════════════════════════════════════════════════════
+(function() {
+  const PHOTO_ANIMS = [
+    'photo-anim-grow','photo-anim-shrink','photo-anim-float','photo-anim-wave',
+    'photo-anim-brush','photo-anim-turns','photo-anim-shapes','photo-anim-loops',
+    'photo-anim-bold-reveal','photo-anim-lines'
+  ];
+  const photoEl = document.querySelector('.hero-medallion');
+  if (photoEl) {
+    // Hapus animasi default heroFade dari inline style/class
+    photoEl.style.opacity = '';
+    photoEl.style.animation = 'none';
+    // Pilih random
+    const chosen = PHOTO_ANIMS[Math.floor(Math.random() * PHOTO_ANIMS.length)];
+    // Terapkan setelah konten muncul (dipanggil oleh triggerHeroTextAnims)
+    photoEl._chosenAnim = chosen;
+  }
+
+  // Trigger animasi foto setelah modal ditutup
+  const _origTrigger = window._triggerPhotoAnim;
+  window._triggerPhotoAnim = function() {
+    const el = document.querySelector('.hero-medallion');
+    if (el && el._chosenAnim && !el._animPlayed) {
+      el._animPlayed = true;
+      el.classList.add(el._chosenAnim);
+    }
+  };
+})();
+
+// ════════════════════════════════════════════════════
+//  TRANSISI CURTAINS / DOORS — random saat buka undangan
+// ════════════════════════════════════════════════════
+function runOpenTransition(callback) {
+  const overlay  = document.getElementById('transitionOverlay');
+  const tcTop    = document.getElementById('tc-top');
+  const tcBottom = document.getElementById('tc-bottom');
+  const tcLeft   = document.getElementById('tc-left');
+  const tcRight  = document.getElementById('tc-right');
+
+  // Pilih random: curtains atau doors
+  const isCurtains = Math.random() < 0.5;
+  const CLOSE_DUR  = 520; // ms panel menutup (layar)
+  const OPEN_DUR   = 560; // ms panel membuka
+  const HOLD       = 120; // ms tahan sesaat sebelum buka
+
+  // Reset semua panel
+  [tcTop,tcBottom,tcLeft,tcRight].forEach(p => {
+    p.style.display = 'none';
+    p.style.animation = '';
+  });
+
+  overlay.className = '';
+  overlay.style.display = 'block';
+  overlay.style.pointerEvents = 'all';
+
+  if (isCurtains) {
+    // ─ CURTAINS: atas & bawah tutup dari tepi ke tengah ─
+    overlay.classList.add('curtains');
+    tcTop.style.cssText    = 'display:block;transform-origin:top center;transform:scaleY(0);';
+    tcBottom.style.cssText = 'display:block;transform-origin:bottom center;transform:scaleY(0);';
+
+    // Phase 1: tutup
+    tcTop.style.animation    = `curtainTopClose ${CLOSE_DUR}ms cubic-bezier(.4,0,.2,1) forwards`;
+    tcBottom.style.animation = `curtainBotClose ${CLOSE_DUR}ms cubic-bezier(.4,0,.2,1) forwards`;
+
+    setTimeout(() => {
+      // Jalankan callback (tampilkan konten) di balik tirai
+      callback();
+      // Phase 2: buka
+      setTimeout(() => {
+        tcTop.style.animation    = `curtainTopOpen ${OPEN_DUR}ms cubic-bezier(.4,0,.2,1) forwards`;
+        tcBottom.style.animation = `curtainBotOpen ${OPEN_DUR}ms cubic-bezier(.4,0,.2,1) forwards`;
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          overlay.style.pointerEvents = 'none';
+        }, OPEN_DUR + 50);
+      }, HOLD);
+    }, CLOSE_DUR);
+
+  } else {
+    // ─ DOORS: kiri & kanan tutup dari tepi ke tengah ─
+    overlay.classList.add('doors');
+    tcLeft.style.cssText  = 'display:block;transform-origin:left center;transform:scaleX(0);';
+    tcRight.style.cssText = 'display:block;transform-origin:right center;transform:scaleX(0);';
+
+    tcLeft.style.animation  = `doorLeftClose  ${CLOSE_DUR}ms cubic-bezier(.4,0,.2,1) forwards`;
+    tcRight.style.animation = `doorRightClose ${CLOSE_DUR}ms cubic-bezier(.4,0,.2,1) forwards`;
+
+    setTimeout(() => {
+      callback();
+      setTimeout(() => {
+        tcLeft.style.animation  = `doorLeftOpen  ${OPEN_DUR}ms cubic-bezier(.4,0,.2,1) forwards`;
+        tcRight.style.animation = `doorRightOpen ${OPEN_DUR}ms cubic-bezier(.4,0,.2,1) forwards`;
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          overlay.style.pointerEvents = 'none';
+        }, OPEN_DUR + 50);
+      }, HOLD);
+    }, CLOSE_DUR);
+  }
+}
+
         // 2. Fungsi untuk menutup modal dan menampilkan konten utama
         function tutupModal() {
             const modal = document.getElementById('modalUndangan');
             const kontenUtama = document.getElementById('kontenUtama');
             const musik = document.getElementById('bgMusic');
 
-            // Menghilangkan modal
-            modal.style.opacity = '0';
-            setTimeout(() => {
+            runOpenTransition(function() {
+              // Sembunyikan modal di balik layar
+              modal.style.opacity = '0';
+              modal.style.display = 'none';
+              document.body.classList.remove('modal-open');
 
-                modal.style.display = 'none';
-                document.body.classList.remove('modal-open'); // Mengaktifkan kembali scroll
-            }, 500); // Waktu transisi dalam milidetik
+              // Tampilkan konten utama
+              kontenUtama.style.display = 'block';
 
+              // Trigger animasi foto hero
+              if (window._triggerPhotoAnim) window._triggerPhotoAnim();
 
-            if (musik) {
+              // Mulai musik
+              if (musik) {
                 musicPlaying = false;
-                musik.play().catch(error => {
-                    console.log("Autoplay dicegah oleh browser, membutuhkan interaksi lebih lanjut:", error);
+                musik.play().catch(function(error) {
+                  console.log("Autoplay dicegah oleh browser:", error);
                 });
-            }
-
-            // Menampilkan konten utama
-            kontenUtama.style.display = 'block';
+              }
+            });
         }
 </script>
 
