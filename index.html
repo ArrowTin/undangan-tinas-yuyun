@@ -960,7 +960,6 @@ body.modal-open {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2rem, 7vw, 2.9rem);
     font-weight: 700;
-    /* Outline emas tipis via text-shadow */
     color: #fff8ee;
     text-shadow:
         0 0 1px rgba(212,160,23,0.6),
@@ -968,6 +967,11 @@ body.modal-open {
     margin-bottom: 18px;
     letter-spacing: 0.03em;
     line-height: 1.15;
+    /* Selalu satu baris, font dikecilkan via JS jika terlalu panjang */
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    width: 100%;
 }
 
 /* ── GARIS PEMISAH ORNAMEN ── */
@@ -1216,6 +1220,21 @@ body.modal-open {
   transition:color .2s,transform .2s;
 }
 
+/* 
+  tinas & yuyub
+*/
+.ty {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #f0dfc8;
+    margin-top: 1rem;
+    margin-bottom: 32px;
+    font-weight: 300;
+    font-style: italic;
+    opacity: 0.88;
+}
+
 </style>
 </head>
 <body class="modal-open">
@@ -1283,7 +1302,7 @@ body.modal-open {
             <i class="fa-solid fa-paper-plane"></i>
         </button>
 
-        <span class="invitation-text">
+        <span class="ty">
           Tinas
         <em>&amp;</em>
         Yuyun
@@ -2162,6 +2181,45 @@ function toggleMusic() {
         if (namaDariUrl) {
             document.getElementById('namaPengunjung').textContent = decodeURIComponent(namaDariUrl);
         }
+
+// ════════════════════════════════════════════════════
+//  AUTO-FIT FONT NAMA TAMU — selalu satu baris
+//  Font dikecilkan otomatis agar nama tidak pernah wrap,
+//  dan diperbesar kembali jika nama pendek.
+// ════════════════════════════════════════════════════
+(function() {
+    function fitNamaTamu() {
+        const el = document.getElementById('namaPengunjung');
+        if (!el) return;
+
+        const MIN = 11;   // px terkecil yang masih terbaca
+        const MAX = 46.4; // px = 2.9rem (batas atas dari clamp CSS)
+
+        // Reset dulu ke ukuran maksimal sebelum mengukur ulang
+        el.style.fontSize = MAX + 'px';
+
+        let size = MAX;
+        // Kecilkan 0.5px per iterasi sampai teks muat dalam satu baris
+        while (el.scrollWidth > el.offsetWidth && size > MIN) {
+            size -= 0.5;
+            el.style.fontSize = size + 'px';
+        }
+    }
+
+    // Jalankan setelah font Google (Playfair Display) benar-benar siap
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(fitNamaTamu);
+    }
+
+    // Cadangan: saat seluruh halaman selesai load
+    window.addEventListener('load', fitNamaTamu);
+
+    // Saat layar dirotasi / resize (misal buka di HP vs landscape)
+    window.addEventListener('resize', fitNamaTamu);
+
+    // Langsung jalankan juga sekarang (untuk nama dari URL param di atas)
+    fitNamaTamu();
+})();
 
 // ════════════════════════════════════════════════════
 //  ANIMASI FOTO HERO — Pilih random saat halaman load
