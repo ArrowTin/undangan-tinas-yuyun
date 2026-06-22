@@ -667,7 +667,7 @@ section.trans-switch.ppt-done { transform: perspective(800px) rotateY(0deg); opa
 }
 .galeri-item-placeholder .ph-icon{font-size:2rem;}
 .galeri-item-placeholder .ph-label{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.15em;}
-.galeri-video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem;max-width:1100px;margin:0 auto;}
+.galeri-video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:1.2rem;max-width:1100px;margin:0 auto;}
 .galeri-video-item{
   border-radius:12px;overflow:hidden;border:1px solid rgba(201,146,58,.2);
   background:rgba(0,0,0,.3);position:relative;aspect-ratio:16/9;
@@ -686,6 +686,13 @@ section.trans-switch.ppt-done { transform: perspective(800px) rotateY(0deg); opa
 /* Video overlay hover */
 #videoOverlay:hover .play-icon{transform:scale(1.12);background:rgba(201,146,58,.32);}
 #videoOverlay:hover{background:rgba(0,0,0,.3);}
+
+/* Perkecil tombol play & teks overlay video di layar kecil agar tidak berlebihan/overlap */
+@media (max-width:480px){
+  #videoOverlay{gap:.55rem !important;}
+  #videoOverlay .play-icon{width:48px !important;height:48px !important;font-size:1.2rem !important;}
+  #videoOverlay p{font-size:.58rem !important;letter-spacing:.12em !important;padding:0 1rem;text-align:center;}
+}
 
 .galeri-upload-note{
   text-align:center;margin-top:1.8rem;font-style:italic;font-size:.85rem;
@@ -1755,7 +1762,7 @@ body.modal-open {
 
       <!-- Video Grid -->
       <div id="galeri-video" class="galeri-video-grid reveal" style="display:none;">
-        <div class="galeri-video-item" id="videoWrapper" style="grid-column:1/-1;max-width:720px;margin:0 auto;width:100%;">
+        <div class="galeri-video-item" id="videoWrapper" style="grid-column:1/-1;max-width:720px;margin:0 auto;width:100%;min-width:0;">
           <!-- Thumbnail / overlay play button — video BELUM di-load -->
           <div id="videoOverlay" style="
             position:absolute;inset:0;display:flex;flex-direction:column;
@@ -1774,7 +1781,6 @@ body.modal-open {
           <!-- Video element — src kosong, baru diisi saat diklik -->
           <video id="weddingVideo"
             style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px;"
-            controls
             preload="none"
             playsinline>
           </video>
@@ -2055,6 +2061,9 @@ function switchTab(btn, tab) {
 function loadAndPlayVideo() {
   const video = document.getElementById('weddingVideo');
   const overlay = document.getElementById('videoOverlay');
+
+  // Tampilkan kontrol native baru setelah video benar-benar mulai diputar
+  video.setAttribute('controls', 'controls');
 
   // Set src baru jika belum di-load
   if (!video.src || video.src === window.location.href) {
